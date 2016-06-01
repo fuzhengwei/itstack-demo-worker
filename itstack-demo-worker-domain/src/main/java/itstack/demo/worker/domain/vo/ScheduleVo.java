@@ -9,6 +9,7 @@ public class ScheduleVo {
     private String desc;   //描述
     private boolean isInStandbyMode; //状态
     private String cronEx;             //cronExpression
+    private String cronExDesc;
 
     public String getKey() {
         return key;
@@ -40,5 +41,13 @@ public class ScheduleVo {
 
     public void setCronEx(String cronEx) {
         this.cronEx = cronEx;
+    }
+
+    public String getCronExDesc() {
+        return cronExDesc;
+    }
+
+    public void setCronExDesc(String cronExDesc) {
+        this.cronExDesc = cronExDesc;
     }
 }

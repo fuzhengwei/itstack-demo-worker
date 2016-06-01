@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	default-autowire="byName">
+
+	<bean id="demoThreeTask" class="itstack.demo.worker.service.schedule.impl.DemoThreeTask"/>
+
+	<bean id="demoThreeTaskHandler" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="demoThreeTask" />
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="true" />
+	</bean>
+
+	<bean id="demoThreeTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="demoThreeTaskHandler" />
+		<property name="cronExpression" value="0/2 1 2 * * ? " />
+	</bean>
+
+	<!-- 定时任务触发器 -->
+	<bean id="demoThreeScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+		<property name="triggers" ref="demoThreeTaskTrigger" />
+		<!-- 是否自动启动 -->
+        <property name="autoStartup" value="false"/>
+	</bean>
+	
+</beans>

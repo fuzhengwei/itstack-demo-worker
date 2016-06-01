@@ -45,7 +45,7 @@ public class ScheduleManageServiceImpl implements ScheduleManageService {
             vo.setDesc(val);
             vo.setInStandbyMode(!scheduler.isInStandbyMode());
             vo.setCronEx(cronEx);
-
+            vo.setCronExDesc(cronEx);
             scheduleVos.add(vo);
         }
         return scheduleVos;

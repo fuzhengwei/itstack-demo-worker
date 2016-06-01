@@ -61,5 +61,48 @@ var util = {
         } else {
             return "关闭";
         }
+    },
+    cronExDesc: function (value, row, index) {
+        return cronExData.cronParse(value);
+    }
+};
+
+var cronExData = {
+     setContent :[
+        "0",
+        "*",
+        "*",
+        "*",
+        "*",
+        "?",
+        "*"
+    ],
+    cronParse: function (cronExDesc) {
+        cronExData.setContent = cronExDesc.split(" ");
+         var cronPareHtml =  "<div>\n" +
+             "    <table border=0>\n" +
+             "        <tr align=\"center\">\n" +
+             "            <td width='25px'>项</td>\n" +
+             "            <td width='25px'>秒</td>\n" +
+             "            <td width='25px'>分</td>\n" +
+             "            <td width='25px'>时</td>\n" +
+             "            <td width='25px'>日</td>\n" +
+             "            <td width='25px'>月</td>\n" +
+             "            <td width='25px'>周</td>\n" +
+             "            <td width='25px'>年</td>\n" +
+             "        </tr>\n" +
+             "        <tr align=\"center\">\n" +
+             "            <td>值</td>\n" +
+             "            <td>"+cronExData.setContent[0]+"</td>\n" +
+             "            <td>"+cronExData.setContent[1]+"</td>\n" +
+             "            <td>"+cronExData.setContent[2]+"</td>\n" +
+             "            <td>"+cronExData.setContent[3]+"</td>\n" +
+             "            <td>"+cronExData.setContent[4]+"</td>\n" +
+             "            <td>"+cronExData.setContent[5]+"</td>\n" +
+             "            <td>"+cronExData.setContent[6]+"</td>\n" +
+             "        </tr>\n" +
+             "    </table>\n" +
+             "</div>";
+        return cronPareHtml;
     }
 };
