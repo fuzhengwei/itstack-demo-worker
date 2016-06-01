@@ -13,4 +13,5 @@
 	src="res/jquery-easyui-1.4/datagrid-detailview.js"></script>
 <script type="text/javascript"
 	src="res/jquery-easyui-1.4/locale/easyui-lang-zh_CN.js"></script>
-
+<script type="text/javascript"
+		src="/res/JSON-js-master/json2.js"></script>

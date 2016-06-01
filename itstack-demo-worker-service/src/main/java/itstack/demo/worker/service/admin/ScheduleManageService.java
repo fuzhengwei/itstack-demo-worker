@@ -10,4 +10,8 @@ public interface ScheduleManageService {
 
    List<ScheduleVo> queryScheduleList() throws Exception;
 
+   void doStartSchedule(List<String> scheduleKeys) throws Exception;
+
+   void doStopSchedule(List<String> scheduleKeys) throws Exception;
+
 }

@@ -5,9 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.*;
 
 public class GsonUtils {
 
@@ -129,5 +127,15 @@ public class GsonUtils {
         return fromJson(json, clazz, null);
     }
 
-
+    public static <T> ArrayList<T> fromJson(String json, ArrayList<T> list) {
+        try {
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            ArrayList<T> vos = gson.fromJson(json, new TypeToken<ArrayList<T>>() {
+            }.getType());
+            return vos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
