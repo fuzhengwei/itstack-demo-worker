@@ -22,7 +22,7 @@
 	<bean id="demoOneScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
 		<property name="triggers" ref="demoOneTaskTrigger" />
 		<!-- 是否自动启动 -->
-        <property name="autoStartup" value="true"/>
+        <property name="autoStartup" value="false"/>
 	</bean>
 	
 </beans>
