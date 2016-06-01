@@ -19,6 +19,9 @@
         <th field="desc" align="left" >
             Desc
         </th>
+        <th field="cronEx" align="left" >
+            cronEx
+        </th>
         <th data-options="field:'inStandbyMode',formatter: util.scheduleStatus" align="center">
             Status
         </th>

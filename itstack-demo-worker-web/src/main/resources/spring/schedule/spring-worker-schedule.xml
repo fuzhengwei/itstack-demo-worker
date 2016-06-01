@@ -8,8 +8,8 @@
     <bean id="scheduleKeyList" class="java.util.ArrayList">
         <constructor-arg>
             <list>
-                <value type="java.lang.String">demoOneTaskHandler</value>
-                <value type="java.lang.String">demoTwoTaskHandler</value>
+                <value type="java.lang.String">demoOneScheduler</value>
+                <value type="java.lang.String">demoTwoScheduler</value>
             </list>
         </constructor-arg>
     </bean>
@@ -17,8 +17,8 @@
     <bean id="scheduleKeyMap" class="java.util.LinkedHashMap">
         <constructor-arg>
             <map>
-                <entry key="demoOneTaskHandler" value-ref="demoOneScheduler"/>
-                <entry key="demoTwoTaskHandler" value-ref="demoTwoScheduler"/>
+                <entry key="demoOneScheduler" value-ref="demoOneScheduler"/>
+                <entry key="demoTwoScheduler" value-ref="demoTwoScheduler"/>
             </map>
         </constructor-arg>
     </bean>
@@ -26,8 +26,8 @@
     <bean id="scheduleValMap" class="java.util.LinkedHashMap">
         <constructor-arg>
             <map>
-                <entry key="demoOneTaskHandler" value="测试任务一"/>
-                <entry key="demoTwoTaskHandler" value="测试任务二"/>
+                <entry key="demoOneScheduler" value="测试任务一"/>
+                <entry key="demoTwoScheduler" value="测试任务二"/>
             </map>
         </constructor-arg>
     </bean>

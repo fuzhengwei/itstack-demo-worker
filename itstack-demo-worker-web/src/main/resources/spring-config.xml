@@ -27,7 +27,10 @@
         </property>
     </bean>
 
+    <bean id="applicationContextHelper" class="itstack.demo.worker.common.spring.ApplicationContextHelper"></bean>
+
     <import resource="classpath:spring/spring*.xml"/>
     <import resource="classpath:spring/schedule/spring-*.xml"/>
     <import resource="classpath:spring/schedule/task/spring-*.xml"/>
+
 </beans>

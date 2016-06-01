@@ -1,10 +1,13 @@
 package itstack.demo.worker.service.admin.impl;
 
+import itstack.demo.worker.common.spring.ApplicationContextHelper;
 import itstack.demo.worker.domain.vo.ScheduleVo;
 import itstack.demo.worker.service.admin.ScheduleManageService;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.quartz.CronTriggerBean;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +22,8 @@ import java.util.Map;
 @Service("scheduleManageService")
 public class ScheduleManageServiceImpl implements ScheduleManageService {
 
+    @Resource
+    private ApplicationContextHelper applicationContextHelper;
     @Autowired
     private ArrayList<String> scheduleKeyList;
     @Autowired
@@ -32,10 +37,15 @@ public class ScheduleManageServiceImpl implements ScheduleManageService {
         for (String key : scheduleKeyList) {
             String val = scheduleValMap.get(key);
             Scheduler scheduler = scheduleKeyMap.get(key);
+            //获取cronExpression
+            CronTriggerBean cronTriggerBean = applicationContextHelper.getBean(key.replace("Scheduler","TaskTrigger"), CronTriggerBean.class);
+            String cronEx = cronTriggerBean.getCronExpression();
             ScheduleVo vo = new ScheduleVo();
             vo.setKey(key);
             vo.setDesc(val);
             vo.setInStandbyMode(!scheduler.isInStandbyMode());
+            vo.setCronEx(cronEx);
+
             scheduleVos.add(vo);
         }
         return scheduleVos;
