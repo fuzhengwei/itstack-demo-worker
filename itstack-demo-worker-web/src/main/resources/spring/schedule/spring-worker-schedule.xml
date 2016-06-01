@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+
+    <bean id="scheduleKeyList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <value type="java.lang.String">demoOneTaskHandler</value>
+                <value type="java.lang.String">demoTwoTaskHandler</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="scheduleKeyMap" class="java.util.LinkedHashMap">
+        <constructor-arg>
+            <map>
+                <entry key="demoOneTaskHandler" value-ref="demoOneScheduler"/>
+                <entry key="demoTwoTaskHandler" value-ref="demoTwoScheduler"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="scheduleValMap" class="java.util.LinkedHashMap">
+        <constructor-arg>
+            <map>
+                <entry key="demoOneTaskHandler" value="测试任务一"/>
+                <entry key="demoTwoTaskHandler" value="测试任务二"/>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>
