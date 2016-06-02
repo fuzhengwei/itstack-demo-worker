@@ -11,6 +11,7 @@
 
     <modules>
         <module>itstack-demo-worker-common</module>
+        <module>itstack-demo-worker-dao</module>
         <module>itstack-demo-worker-domain</module>
         <module>itstack-demo-worker-service</module>
         <module>itstack-demo-worker-export</module>
@@ -226,6 +227,16 @@
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
             <version>1.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jd</groupId>
+            <artifactId>jsf</artifactId>
+            <version>1.5.5</version>
         </dependency>
     </dependencies>
 
