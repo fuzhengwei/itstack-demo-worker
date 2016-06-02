@@ -19,7 +19,11 @@ var menu = {
         if ("select" == head) {
             menu.doExecSelect(sql, table);
         } else if ("insert" == head) {
-            menu.doExecInsert(sql, table);
+            menu.doExecInsert(sql);
+        } else if ("delete" == head) {
+            menu.doExecDelete(sql);
+        } else if ("update" == head) {
+            menu.doExecUpdate(sql);
         }
     },
     doExecSelect: function (sql, table) {
@@ -27,21 +31,41 @@ var menu = {
             {
                 table: table
             }, function (result) {
-                $('#dg').datagrid(
-                    {
-                        url: '/workerDaoController/selectBySql.do?sql=' + sql + '&t=' + Math.random(),
-                        fitColumns: true,
-                        singleSelect: true,
-                        rownumbers: true,
-                        loadMsg: '',
-                        height: 'auto',
-                        columns: [result]
-                    }
-                );
+                if (result.easyResult.success){
+                    $('#dg').datagrid(
+                        {
+                            url: '/workerDaoController/selectBySql.do?sql=' + sql + '&t=' + Math.random(),
+                            fitColumns: true,
+                            singleSelect: true,
+                            rownumbers: true,
+                            loadMsg: '',
+                            height: 'auto',
+                            columns: [result.dataTableColumns]
+                        }
+                    );
+                } else{
+                    menu.doExecShowMsg(result.easyResult.msg);
+                }
             }, 'json');
     },
-    doExecInsert: function (sql, table) {
+    doExecInsert: function (sql) {
         $.get('/workerDaoController/insertBySql.do',
+            {
+                sql: sql
+            }, function (result) {
+                menu.doExecShowMsg(result.msg);
+            }, 'json');
+    },
+    doExecDelete: function (sql) {
+        $.get('/workerDaoController/deleteBySql.do',
+            {
+                sql: sql
+            }, function (result) {
+                menu.doExecShowMsg(result.msg);
+            }, 'json');
+    },
+    doExecUpdate: function (sql) {
+        $.get('/workerDaoController/updateBySql.do',
             {
                 sql: sql
             }, function (result) {

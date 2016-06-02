@@ -3,6 +3,7 @@ package itstack.demo.worker.web;
 import itstack.demo.worker.common.domain.EasyResult;
 import itstack.demo.worker.common.utils.GsonUtils;
 import itstack.demo.worker.domain.po.TableColumn;
+import itstack.demo.worker.domain.res.DataTableColumnRes;
 import itstack.demo.worker.domain.vo.DataTableColumn;
 import itstack.demo.worker.service.WorkerDaoService;
 import org.slf4j.Logger;
@@ -29,27 +30,37 @@ public class WorkerDaoController {
 
     @RequestMapping(value = "showColumns")
     @ResponseBody
-    public List<DataTableColumn> showColumns(String table) {
-        List<DataTableColumn> dataTableColumns = new ArrayList<DataTableColumn>();
-        List<TableColumn> tableColumns = workerDaoService.showColumns(table);
-        DataTableColumn ck = new DataTableColumn();
-        ck.setField("ok");
-        ck.setCheckbox(true);
-        dataTableColumns.add(ck);
-        for (TableColumn tableColumn : tableColumns) {
-            DataTableColumn dataTableColumn = new DataTableColumn();
-            dataTableColumn.setField(tableColumn.getField());
-            dataTableColumn.setTitle(tableColumn.getField());
-            dataTableColumn.setAlign("left");
-            dataTableColumns.add(dataTableColumn);
+    public DataTableColumnRes showColumns(String table) {
+        DataTableColumnRes dataTableColumnRes = new DataTableColumnRes();
+        try {
+            logger.info("查询表字段。req：{}", table);
+            List<DataTableColumn> dataTableColumns = new ArrayList<DataTableColumn>();
+            List<TableColumn> tableColumns = workerDaoService.showColumns(table);
+            DataTableColumn ck = new DataTableColumn();
+            ck.setField("ok");
+            ck.setCheckbox(true);
+            dataTableColumns.add(ck);
+            for (TableColumn tableColumn : tableColumns) {
+                DataTableColumn dataTableColumn = new DataTableColumn();
+                dataTableColumn.setField(tableColumn.getField());
+                dataTableColumn.setTitle(tableColumn.getField());
+                dataTableColumn.setAlign("left");
+                dataTableColumns.add(dataTableColumn);
+            }
+            logger.info("查询表字段。res：{}", GsonUtils.toJson(tableColumns));
+            dataTableColumnRes.setEasyResult(EasyResult.buildSuccessResult());
+            dataTableColumnRes.setDataTableColumns(dataTableColumns);
+        } catch (Exception e) {
+            logger.error("查询表字段。req：{}", table, e);
+            dataTableColumnRes.setEasyResult(EasyResult.buildErrResult(e));
         }
-        logger.info("查询表字段。res：{}", GsonUtils.toJson(tableColumns));
-        return dataTableColumns;
+        return dataTableColumnRes;
     }
 
     @RequestMapping(value = "selectBySql")
     @ResponseBody
     public List selectBySql(String sql) {
+        logger.info("查询表数据。req：{}", sql);
         List list = workerDaoService.selectBySql(sql);
         logger.info("查询表数据。res：{}", GsonUtils.toJson(list));
         return list;
@@ -64,7 +75,35 @@ public class WorkerDaoController {
             logger.info("新增表数据。res：ok");
             return EasyResult.buildSuccessResult();
         } catch (Exception e) {
-            logger.info("新增表数据失败。req：{}", sql, e);
+            logger.error("新增表数据失败。req：{}", sql, e);
+            return EasyResult.buildErrResult(e);
+        }
+    }
+
+    @RequestMapping(value = "deleteBySql")
+    @ResponseBody
+    public EasyResult deleteBySql(String sql) {
+        try {
+            logger.info("删除表数据。req：{}", sql);
+            workerDaoService.deleteBySql(sql);
+            logger.info("删除表数据。res：ok");
+            return EasyResult.buildSuccessResult();
+        } catch (Exception e) {
+            logger.error("删除表数据失败。req：{}", sql, e);
+            return EasyResult.buildErrResult(e);
+        }
+    }
+
+    @RequestMapping(value = "updateBySql")
+    @ResponseBody
+    public EasyResult updateBySql(String sql) {
+        try {
+            logger.info("修改表数据。req：{}", sql);
+            workerDaoService.updateBySql(sql);
+            logger.info("修改表数据。res：ok");
+            return EasyResult.buildSuccessResult();
+        } catch (Exception e) {
+            logger.error("修改表数据失败。req：{}", sql, e);
             return EasyResult.buildErrResult(e);
         }
     }

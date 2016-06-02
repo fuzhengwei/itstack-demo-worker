@@ -19,4 +19,16 @@
          $sql$
         ]]>
     </insert>
+
+    <delete id="deleteBySql" parameterClass="java.lang.String">
+        <![CDATA[
+         $sql$
+        ]]>
+    </delete>
+
+    <update id="updateBySql" parameterClass="java.lang.String">
+        <![CDATA[
+         $sql$
+        ]]>
+    </update>
 </sqlMap>

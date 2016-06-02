@@ -31,4 +31,14 @@ public class WorkerDaoServiceImpl implements WorkerDaoService {
     public void insertBySql(String sql) {
         workerDao.insertBySql(sql);
     }
+
+    @Override
+    public void deleteBySql(String sql) {
+        workerDao.deleteBySql(sql);
+    }
+
+    @Override
+    public void updateBySql(String sql) {
+        workerDao.updateBySql(sql);
+    }
 }

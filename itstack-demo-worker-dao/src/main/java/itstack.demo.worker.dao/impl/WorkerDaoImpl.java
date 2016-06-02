@@ -24,4 +24,14 @@ public class WorkerDaoImpl extends BaseDao implements WorkerDao {
     public void insertBySql(String sql) {
         this.insert("Worker.insertBySql", sql);
     }
+
+    @Override
+    public void deleteBySql(String sql) {
+        this.delete("Worker.deleteBySql", sql);
+    }
+
+    @Override
+    public void updateBySql(String sql) {
+        this.update("Worker.updateBySql", sql);
+    }
 }
