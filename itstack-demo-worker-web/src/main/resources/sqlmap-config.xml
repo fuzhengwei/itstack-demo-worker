@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig  PUBLIC "-//iBATIS.com//DTD SQL Map
+Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<settings cacheModelsEnabled="false" enhancementEnabled="true"
+		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="200"
+		maxSessions="60" maxTransactions="20" useStatementNamespaces="true"
+		defaultStatementTimeout="20" />
+
+    <sqlMap resource="mapping/mysql/worker_Mapper.xml" />
+
+</sqlMapConfig>
