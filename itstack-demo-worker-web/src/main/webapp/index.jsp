@@ -40,6 +40,11 @@
                     <span class="icon-submenu-frame icon-submenu"></span> 定时任务
                 </a>
             </div>
+            <div style="padding: 5px 0pt 5px 10px;">
+                <a href="javascript:void(0)" onclick="javascript:top.menuCall('数据管理','worker/dao.jsp');">
+                    <span class="icon-submenu-frame icon-submenu"></span> 数据管理
+                </a>
+            </div>
         </div>
     </div>
 </div>

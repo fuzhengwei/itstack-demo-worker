@@ -19,4 +19,9 @@ public class WorkerDaoImpl extends BaseDao implements WorkerDao {
     public List selectBySql(String sql) {
         return this.queryForList("Worker.selectBySql", sql);
     }
+
+    @Override
+    public void insertBySql(String sql) {
+        this.insert("Worker.insertBySql", sql);
+    }
 }

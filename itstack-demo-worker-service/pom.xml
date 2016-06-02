@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>itstack-demo-worker</groupId>
-            <artifactId>itstack-demo-worker-domain</artifactId>
+            <artifactId>itstack-demo-worker-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

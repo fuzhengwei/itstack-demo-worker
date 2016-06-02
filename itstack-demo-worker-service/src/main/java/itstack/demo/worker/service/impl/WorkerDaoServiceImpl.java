@@ -26,4 +26,9 @@ public class WorkerDaoServiceImpl implements WorkerDaoService {
     public List selectBySql(String sql) {
         return workerDao.selectBySql(sql);
     }
+
+    @Override
+    public void insertBySql(String sql) {
+        workerDao.insertBySql(sql);
+    }
 }

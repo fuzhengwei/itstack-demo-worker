@@ -13,4 +13,10 @@
          $sql$
         ]]>
     </select>
+
+    <insert id="insertBySql" parameterClass="java.lang.String">
+        <![CDATA[
+         $sql$
+        ]]>
+    </insert>
 </sqlMap>

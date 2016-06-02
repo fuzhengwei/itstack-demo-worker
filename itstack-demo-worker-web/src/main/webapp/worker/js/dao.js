@@ -1,28 +1,28 @@
 console.info("hello");
 
 var menu = {
-    doSearch: function () {
+    doExec: function () {
         var sql = $("#sql").val();
-        menu.doSearchWay(sql);
+        menu.doExecWay(sql);
     },
-    doSearchWay: function (sql) {
-        sql = sql.toLowerCase();
+    doExecWay: function (sql) {
+        sql = sql.toLowerCase().replace(";", "");
         var head = sql.substring(0, sql.indexOf(" ")).trim();
+        var table;
+        //获取表名
+        if (sql.indexOf("where") > 0) {
+            table = sql.substring(sql.indexOf("from") + 5, sql.indexOf("where")).trim();
+        } else {
+            table = sql.substring(sql.indexOf("from") + 5, sql.length).trim();
+        }
+        //分别处理
         if ("select" == head) {
-            var table;
-            if (sql.indexOf("where") > 0) {
-                table = sql.substring(sql.indexOf("from") + 5, sql.indexOf("where")).trim();
-            } else {
-                table = sql.substring(sql.indexOf("from") + 5, sql.length).trim();
-            }
-            menu.doSearchSelect(sql, table);
+            menu.doExecSelect(sql, table);
+        } else if ("insert" == head) {
+            menu.doExecInsert(sql, table);
         }
     },
-    doSearchSelect: function (sql, table) {
-        console.info(sql);
-        console.info(table);
-        $("#dg tr").append("<th field='table' align='left'>table<\/th>");
-        //获得数据列
+    doExecSelect: function (sql, table) {
         $.get('/workerDaoController/showColumns.do',
             {
                 table: table
@@ -38,7 +38,26 @@ var menu = {
                         columns: [result]
                     }
                 );
-                console.info(result);
             }, 'json');
+    },
+    doExecInsert: function (sql, table) {
+        $.get('/workerDaoController/insertBySql.do',
+            {
+                sql: sql
+            }, function (result) {
+                menu.doExecShowMsg(result.msg);
+            }, 'json');
+    },
+    doExecShowMsg: function (msg) {
+        $('#dg').datagrid(
+            {
+                data: [
+                    {ExecMsg: msg}
+                ],
+                columns: [[
+                    {field: 'ExecMsg', title: 'ExecMsg', align: 'left'}
+                ]]
+            }
+        );
     }
 };

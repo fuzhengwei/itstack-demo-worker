@@ -1,5 +1,6 @@
 package itstack.demo.worker.web;
 
+import itstack.demo.worker.common.domain.EasyResult;
 import itstack.demo.worker.common.utils.GsonUtils;
 import itstack.demo.worker.domain.po.TableColumn;
 import itstack.demo.worker.domain.vo.DataTableColumn;
@@ -50,9 +51,21 @@ public class WorkerDaoController {
     @ResponseBody
     public List selectBySql(String sql) {
         List list = workerDaoService.selectBySql(sql);
-        logger.info("查询表数据。res：{}",GsonUtils.toJson(list));
+        logger.info("查询表数据。res：{}", GsonUtils.toJson(list));
         return list;
     }
 
-
+    @RequestMapping(value = "insertBySql")
+    @ResponseBody
+    public EasyResult insertBySql(String sql) {
+        try {
+            logger.info("新增表数据。req：{}", sql);
+            workerDaoService.insertBySql(sql);
+            logger.info("新增表数据。res：ok");
+            return EasyResult.buildSuccessResult();
+        } catch (Exception e) {
+            logger.info("新增表数据失败。req：{}", sql, e);
+            return EasyResult.buildErrResult(e);
+        }
+    }
 }

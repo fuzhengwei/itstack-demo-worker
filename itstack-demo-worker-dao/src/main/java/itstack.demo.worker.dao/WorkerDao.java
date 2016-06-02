@@ -13,4 +13,5 @@ public interface WorkerDao {
 
     List selectBySql(String sql);
 
+    void insertBySql(String sql);
 }

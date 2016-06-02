@@ -11,6 +11,7 @@ public class EasyResult {
     static public EasyResult buildSuccessResult(){
         EasyResult easyResult = new EasyResult();
         easyResult.setSuccess(true);
+        easyResult.setMsg("success");
         return easyResult;
     }
 
