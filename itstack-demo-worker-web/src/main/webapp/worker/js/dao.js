@@ -6,7 +6,12 @@ var menu = {
         menu.doExecWay(sql);
     },
     doExecWay: function (sql) {
-        sql = sql.toLowerCase().replace(";","").trim();
+        sql = sql.toLowerCase().replace(";", "").trim();
+        if (null == sql || "" == sql) {
+            menu.doExecShowMsg("I can't understand.");
+            return;
+        }
+        //获得执行方式
         var head = sql.substring(0, sql.indexOf(" ")).trim();
         //分别处理
         if ("select" == head) {
@@ -17,6 +22,8 @@ var menu = {
             menu.doExecDelete(sql);
         } else if ("update" == head) {
             menu.doExecUpdate(sql);
+        } else {
+            menu.doExecShowMsg("I can't understand.");
         }
     },
     doExecSelect: function (sql) {
@@ -24,7 +31,7 @@ var menu = {
             {
                 sql: sql
             }, function (result) {
-                if (result.easyResult.success){
+                if (result.easyResult.success) {
                     $('#dg').datagrid(
                         {
                             url: '/workerDaoController/selectBySql.do?sql=' + sql + '&t=' + Math.random(),
@@ -36,7 +43,7 @@ var menu = {
                             columns: [result.dataTableColumns]
                         }
                     );
-                } else{
+                } else {
                     menu.doExecShowMsg(result.easyResult.msg);
                 }
             }, 'json');
