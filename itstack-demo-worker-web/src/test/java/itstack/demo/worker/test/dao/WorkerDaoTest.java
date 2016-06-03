@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class WorkerDaoTest {
 
     @Test
     public void test_selectBySql(){
-        List list = workerDao.selectBySql("select * from activity");
+        List<HashMap<String,String>> list = workerDao.selectBySql("select * from activity");
         System.out.println(GsonUtils.toJson(list));
     }
 

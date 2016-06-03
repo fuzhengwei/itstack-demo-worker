@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -76,12 +77,12 @@ public class WorkerDaoController {
 
     @RequestMapping(value = "selectBySql")
     @ResponseBody
-    public List selectBySql(String sql) {
+    public String selectBySql(String sql) {
         try {
             logger.info("查询表数据。req：{}", sql);
             List list = workerDaoService.selectBySql(sql);
             logger.info("查询表数据。res：{}", GsonUtils.toJson(list));
-            return list;
+            return GsonUtils.toJson(list);
         } catch (Exception e) {
             logger.error("查询表数据。req：{}", sql, e);
             return null;
