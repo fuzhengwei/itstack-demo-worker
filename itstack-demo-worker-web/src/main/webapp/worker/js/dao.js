@@ -8,15 +8,15 @@ var menu = {
     doExecWay: function (sql) {
         sql = sql.toLowerCase().replace(";", "");
         var head = sql.substring(0, sql.indexOf(" ")).trim();
-        var table;
-        //获取表名
-        if (sql.indexOf("where") > 0) {
-            table = sql.substring(sql.indexOf("from") + 5, sql.indexOf("where")).trim();
-        } else {
-            table = sql.substring(sql.indexOf("from") + 5, sql.length).trim();
-        }
         //分别处理
         if ("select" == head) {
+            var table;
+            //获取表名
+            if (sql.indexOf("where") > 0) {
+                table = sql.substring(sql.indexOf("from") + 5, sql.indexOf("where")).trim();
+            } else {
+                table = sql.substring(sql.indexOf("from") + 5, sql.length).trim();
+            }
             menu.doExecSelect(sql, table);
         } else if ("insert" == head) {
             menu.doExecInsert(sql);
