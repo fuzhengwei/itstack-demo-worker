@@ -28,9 +28,9 @@ public class WorkerDaoController {
     @Resource
     private WorkerDaoService workerDaoService;
 
-    @RequestMapping(value = "showColumns")
+    @RequestMapping(value = "showColumnsByTable")
     @ResponseBody
-    public DataTableColumnRes showColumns(String table) {
+    public DataTableColumnRes showColumnsByTable(String table) {
         DataTableColumnRes dataTableColumnRes = new DataTableColumnRes();
         try {
             logger.info("查询表字段。req：{}", table);
@@ -52,6 +52,23 @@ public class WorkerDaoController {
             dataTableColumnRes.setDataTableColumns(dataTableColumns);
         } catch (Exception e) {
             logger.error("查询表字段。req：{}", table, e);
+            dataTableColumnRes.setEasyResult(EasyResult.buildErrResult(e));
+        }
+        return dataTableColumnRes;
+    }
+
+    @RequestMapping(value = "showColumnsBySql")
+    @ResponseBody
+    public DataTableColumnRes showColumnsBySql(String sql) {
+        DataTableColumnRes dataTableColumnRes = new DataTableColumnRes();
+        try {
+            logger.info("查询表字段。req：{}", sql);
+            List<DataTableColumn> dataTableColumns = workerDaoService.showColumnsBySql(sql);
+            logger.info("查询表字段。res：{}", GsonUtils.toJson(dataTableColumns));
+            dataTableColumnRes.setEasyResult(EasyResult.buildSuccessResult());
+            dataTableColumnRes.setDataTableColumns(dataTableColumns);
+        } catch (Exception e) {
+            logger.error("查询表字段。req：{}", sql, e);
             dataTableColumnRes.setEasyResult(EasyResult.buildErrResult(e));
         }
         return dataTableColumnRes;

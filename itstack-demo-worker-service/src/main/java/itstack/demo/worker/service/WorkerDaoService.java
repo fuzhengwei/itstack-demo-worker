@@ -1,6 +1,7 @@
 package itstack.demo.worker.service;
 
 import itstack.demo.worker.domain.po.TableColumn;
+import itstack.demo.worker.domain.vo.DataTableColumn;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface WorkerDaoService {
     void deleteBySql(String sql);
 
     void updateBySql(String sql);
+
+    List<DataTableColumn> showColumnsBySql(String sql);
 }
