@@ -6,7 +6,7 @@ var menu = {
         menu.doExecWay(sql);
     },
     doExecWay: function (sql) {
-        sql = sql.toLowerCase().replace(";", "");
+        sql = sql.toLowerCase().replace(";","").trim();
         var head = sql.substring(0, sql.indexOf(" ")).trim();
         //分别处理
         if ("select" == head) {

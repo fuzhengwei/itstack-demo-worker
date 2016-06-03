@@ -24,7 +24,14 @@ public class WorkerDaoServiceTest {
 
     @Test
     public void test_showColumnsBySql() {
-        List<DataTableColumn> dataTableColumns = workerDaoService.showColumnsBySql("select * from activity_user limit 10,1");
+        List<DataTableColumn> dataTableColumns = workerDaoService.showColumnsBySql(" select c.id as activityid,c.activityname,\n" +
+                "                a.pin,a.inviteCode,a.userPin,a.activateTime,\n" +
+                "                b.targetNum,b.completeNum,b.obtainLimit,b.obtainNum,b.execstatus,\n" +
+                "                (select d.rewardcouponkey from activity_reward d where a.execId = d.execId) as rewardcouponkey,\n" +
+                "                (select d.rewardstatus from activity_reward d where a.execId = d.execId) as rewardstatus\n" +
+                "        from activity_exec_detail a\n" +
+                "        left join activity_exec b on a.execId = b.id\n" +
+                "        left join activity c on a.activityId = c.id");
         System.out.println("测试结果：" + GsonUtils.toJson(dataTableColumns));
     }
 

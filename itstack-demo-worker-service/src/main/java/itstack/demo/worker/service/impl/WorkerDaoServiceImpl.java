@@ -47,7 +47,7 @@ public class WorkerDaoServiceImpl implements WorkerDaoService {
     @Override
     public List<DataTableColumn> showColumnsBySql(String sql) {
         List<DataTableColumn> dataTableColumns = new ArrayList<DataTableColumn>();
-        if (sql.contains("limit")) {
+        if (sql.lastIndexOf("limit") > sql.lastIndexOf("from")) {
             sql = sql.substring(0, sql.lastIndexOf("limit")) + " limit 1";
         } else {
             sql += " limit 1";
